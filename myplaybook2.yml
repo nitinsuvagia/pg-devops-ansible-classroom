@@ -1,0 +1,20 @@
+---
+ - name: My Playbook for worker1
+   hosts: dbserver
+   become: yes
+   tasks:
+      - name: copy log fie from controller to worker1
+        copy: src=/var/log/dmesg dest=/tmp/controlerlogs.txt
+
+      - name: simple task to print msg hello
+        debug: msg="Hello All"
+
+ - name: My Playbook for workder2
+   hosts: webserver
+   become: yes
+   tasks:
+      - name: lets add user sampleuser
+        user: name=sampleuser state=present create_home=yes
+
+
+

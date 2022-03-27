@@ -1,0 +1,16 @@
+---
+   - name: project for users and directory management
+     hosts:
+        mygroup
+     become: yes
+     tasks:
+     - name: create a user devops
+       user: name=devops state=present
+
+     - name: create a user group develoers
+       group: name=developers state=present
+
+     - name: create a projectx directory
+       file: path=/projectx owner=devops group=developers mode=770 state=directory
+
+

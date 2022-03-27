@@ -1,0 +1,19 @@
+---
+ - name: URL Connectivity check
+   hosts: dbserver
+   tasks:
+      - name: Checking simplilearn website
+        uri:
+            url: "https://www.simplilearnss.com"
+        register: myresult
+        ignore_errors: yes
+
+      - name: Print Success
+        debug:
+            msg: "The Website Simplileran.com is ACCESSIABLE"
+        when: myresult.status == 200
+
+      - name: Print Failure
+        debug:
+            msg: "The Website Simplileran.com is NOT-ACCESSIABLE"
+        when: myresult.status == -1

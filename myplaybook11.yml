@@ -1,0 +1,25 @@
+---
+  - hosts: dbserver
+    become: yes
+    tasks:
+          - name: Adding user Groups
+            group:
+                name: "{{ item }}"
+                state: present
+            loop:
+                - testing_auto
+                - developers_java
+                - developers_python
+
+          - name: Adding user Account
+            user:
+                name: "{{ item.uname }}"
+                uid: "{{ item.uid }}"
+                shell: "{{ item.myshell }}"
+                groups: "{{ item.ugroup }}"
+                append: yes
+            loop:
+                - {"uname":"userJ","uid":"2020","myshell":"/bin/bash","ugroup":"developers_python"}
+                - {"uname":"userK","uid":"3030","myshell":"/sbin/nologin","ugroup":"developers_java"}
+                - {"uname":"userL","uid":"4040","myshell":"/bin/false","ugroup":"testing_auto"}
+

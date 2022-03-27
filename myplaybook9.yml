@@ -1,0 +1,30 @@
+---
+  - name: Apache Setup
+    become: yes
+    hosts:
+            - webserver
+            - dbserver
+    vars:
+            - mypackage: apache2
+            - myservice: apache2
+    tasks:
+       - name: Install WebServer Package
+         apt:
+             name: "{{ mypackage }}"
+             state: latest
+             update_cache: yes
+         notify: serviceRestart
+
+       - name: Webpage Contents
+         copy: 
+              content: "Hello All Welcome to {{ ansible_hostname }}"
+              dest: /var/www/html/index.html
+
+    handlers:
+       - name: serviceRestart
+         service:
+             name: "{{ myservice }}"
+             state: restarted
+             enabled: true
+
+

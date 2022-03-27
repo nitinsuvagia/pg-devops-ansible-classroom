@@ -1,0 +1,11 @@
+---
+ - name: My play  1 for adding or deleting user account
+   hosts: mygroup
+   vars_files:
+       - /home/devops/mysecVars.yaml                  ## its a vault
+   become: yes
+   tasks:
+     - name: Make sure {{myuser}} is {{mystate}}
+       user:
+          name: "{{myuser}}"
+          state: "{{mystate}}"

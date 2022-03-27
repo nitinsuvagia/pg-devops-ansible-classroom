@@ -1,0 +1,12 @@
+---
+  - name: My Playbook for adding or deleting user account
+    hosts: all
+    vars_files:
+       - /home/labsuser/myvars.yml
+    become: yes
+    tasks:
+      - name: Make sure {myuser}} is {{mystate}}
+        user: 
+          name: "{{ myuser }}"
+          state: "{{ mystate }}"
+

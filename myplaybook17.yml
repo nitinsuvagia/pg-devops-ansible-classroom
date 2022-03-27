@@ -1,0 +1,20 @@
+---
+ - hosts: webserver
+   tasks:
+      - apt: 
+           name: tree
+           state: latest
+        become: yes
+        register: output
+
+      - name: Printing register of previous task
+        debug:
+            msg: "{{ output }}"
+
+      - name: Printing register of previous task
+        debug:
+            msg: "{{ output.changed }}"
+
+      - name: Printing register of previous task
+        debug:
+            msg: "{{ output.failed }}"

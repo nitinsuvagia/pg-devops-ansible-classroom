@@ -1,0 +1,8 @@
+---
+ - hosts: 
+       - webserver
+       - dbserver
+   tasks:
+       - name: Lets print vars
+         debug:
+                msg: "variable 1 is {{var1}} , variable 2 is {{var2}} and variable3 is {{var3}}"

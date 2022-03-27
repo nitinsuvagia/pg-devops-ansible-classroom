@@ -1,0 +1,13 @@
+---
+  - name: Play level vars example on user management
+    hosts: all
+    vars:
+      - myuser: developer01
+        mystate: absent
+    become: yes
+    tasks:
+      - name: Make Sure {{myuser}} is {{mystate}}
+        user:
+          name: "{{ myuser }}"
+          state: "{{ mystate }}"
+

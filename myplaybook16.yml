@@ -1,0 +1,16 @@
+---
+ - hosts: webserver
+   become: yes
+   tasks:
+     - name: Replace entry in file with Listen 80
+       lineinfile:
+          path: /etc/apache2/ports.conf
+          regexp: '^Listen '
+          line: Listen 80
+
+     - name: add new Ip address and hostname of controller to /etc/hosts file
+       lineinfile:
+          path: /etc/hosts
+          state: absent
+          insertafter: '^127.0.0.1 localhost'
+          line: 172.31.25.253 ip-172-31-25-253 controller master

@@ -1,0 +1,9 @@
+---
+ - hosts: webserver
+   tasks:
+           - command: grep devops /var/log/auth.log
+             register: output
+             become: yes
+
+           - debug: 
+               msg: "{{output.stdout}}" 

@@ -1,0 +1,12 @@
+---
+ - name: Setting up webserver using APACHE
+   hosts: webserver
+   become: yes
+   tasks:
+     - name: Installing Apache webserver package on Debian family node
+       apt: name=apache2 state=present update_cache=yes
+       when: ansible_os_family=="Debian" and ansible_memtotal_mb >= 3000
+
+     - name: Installing Apache webserver package on RedHat family node
+       yum:  name=httpd state=present
+       when: ansible_os_family=="RedHat"

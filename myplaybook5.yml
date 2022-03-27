@@ -1,0 +1,14 @@
+---
+   - name: Pass variable Host Level
+     hosts: webserver dbserver
+     become: yes
+     tasks:
+       - name: Restart Service Server using parameters
+         service:
+            name: "{{myservice}}"
+            state: restarted
+
+
+
+           
+        

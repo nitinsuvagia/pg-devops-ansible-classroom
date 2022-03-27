@@ -1,0 +1,13 @@
+---
+  - hosts:
+       - webserver
+       - dbserver
+    become: yes
+    vars:
+       - myadmin: Nitin
+       - myemail: nitin@softqubes.com
+    tasks:
+       - name: Setting up Message of the Day
+         template:
+              src: /home/labsuser/Ansible-works/myjinjatemp.j2
+              dest: /etc/motd

@@ -1,0 +1,37 @@
+---
+ - name: Installing and configuring Apache Webserver
+   hosts: webserver
+   become: yes
+   vars: 
+     - package1: apache0.1
+     - package2: apache2
+     - service1: apache0.1
+     - service2: apache2
+   tasks:
+     - block:
+         - name: "Installing {{ package1 }}"
+           apt: 
+              name: "{{ package1 }}"
+              state: present
+
+         - name: "Restart service {{service1 }}"
+           service:
+              name: "{{ service1 }}"
+              state: restarted
+
+       rescue:  
+         - name: "Installing {{ package2 }}"
+           apt: 
+              name: "{{ package2 }}"
+              state: present
+
+         - name: "Restart service {{service2 }}"
+           service:
+              name: "{{ service2 }}"
+              state: restarted
+
+       always:
+         - name: Placing webpages
+           copy: 
+              content: "This is webpage from ansible"
+              dest: /var/www/html/index.html
