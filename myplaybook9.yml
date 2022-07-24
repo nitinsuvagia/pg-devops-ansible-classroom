@@ -4,12 +4,12 @@
     hosts:
             - webserver
             - dbserver
-    vars:
-            - mypackage: apache2
-            - myservice: apache2
+    vars: 
+            - mypackage: httpd 
+            - myservice: httpd
     tasks:
        - name: Install WebServer Package
-         apt:
+         yum:
              name: "{{ mypackage }}"
              state: latest
              update_cache: yes

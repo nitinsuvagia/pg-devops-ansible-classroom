@@ -2,10 +2,10 @@
 - name: Install docker
   gather_facts: true
   check_mode: no # yes only for test
-  hosts: swarm_cluster
+  hosts: livesqt
   vars:
     sudoers:
-      - ansible
+      - devops
   become: true
   tasks:
 
@@ -20,11 +20,11 @@
       failed_when: "docker_service_result is failed and 'Could not find the requested service' not in docker_service_result.msg"
 
 # grep /etc/group -e "docker"
-    - name: Remove docker group
-      group:
-        name: docker
-        state: absent
-        system: yes
+#    - name: Remove docker group
+#      group:
+#        name: docker
+#        state: absent
+#        system: yes
 
     - name: Remove 'docker', 'yum-utils', 'lvm2' and 'device-mapper-persistent-data' packages
       package:
@@ -92,13 +92,13 @@
         state: started
         enabled: yes
 
-    - name: Test Docker with hello world example
-      shell: 'docker run hello-world'
-      register: hello_world_output
+#    - name: Test Docker with hello world example
+#      shell: 'docker run hello-world'
+#      register: hello_world_output
 
-    - name: Show output of hello word example
-      debug:
-        msg: 'Container output: {{ hello_world_output.stdout }}'
+#    - name: Show output of hello word example
+#      debug:
+#        msg: 'Container output: {{ hello_world_output.stdout }}'
 
     - name: Create docker group
       group:
@@ -108,7 +108,7 @@
 
     - name: Add ansible to docker group
       user:
-        name: ansible
+        name: devops
         groups: docker
         append: yes
 

@@ -3,6 +3,7 @@
      hosts:
         mygroup
      become: yes
+     gather_facts: False
      tasks:
      - name: create a user devops
        user: name=devops state=present

@@ -1,8 +1,14 @@
-[dbserver]
-172.31.39.169 ansible_user=devops
+[dbserver] 
+172.31.39.169
+172.31.23.239
 
 [webserver]
-172.31.39.169 ansible_user=devops
+172.31.25.253
+
+
+[myservers]
+10.10.10.100
+127.0.0.1
 
 
 [mygroup:children]
